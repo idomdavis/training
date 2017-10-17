@@ -12,7 +12,7 @@ const (
 
 func main() {
 	for _, i := range []int{1, 2, 4, 5, 6, 7, 8, 15, 21, 42} {
-		defer println(i, fizzbuzz(i))
+		println(i, fizzbuzz(i))
 	}
 }
 
