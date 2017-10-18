@@ -12,7 +12,7 @@ func TestFizzBuzz(t *testing.T) {
 		15: "FizzBuzz",
 	} {
 		if r := fizzbuzz(input); r != want {
-			t.Error("fizzbuzz(%s), wanted '%s' got %s", input, want, r)
+			t.Errorf("fizzbuzz(%s), wanted '%s' got %s", input, want, r)
 		}
 	}
 }
