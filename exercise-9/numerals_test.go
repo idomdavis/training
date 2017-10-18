@@ -1,9 +1,9 @@
-package rn_test
+package exercise_9_test
 
 import (
 	"fmt"
 
-	"github.com/domdavis/training/rn"
+	rn "github.com/domdavis/training/exercise-9"
 )
 
 func ExampleAtor() {

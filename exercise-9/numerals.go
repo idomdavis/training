@@ -1,7 +1,7 @@
-// Package rn handles conversion to and from Roman Numerals. It uses the
+// This package handles conversion to and from Roman Numerals. It uses the
 // Wikipedia definition for Roman numerals and therefore may not handle as
 // complete a set as other implementations.
-package rn
+package exercise_9
 
 import (
 	"fmt"

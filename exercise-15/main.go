@@ -14,6 +14,25 @@ type fizzbuzz struct {
 
 var converters = []converter{fizz, buzz, number}
 
+func main() {
+	chans := make([]chan fizzbuzz, 4)
+
+	for i := range chans {
+		chans[i] = make(chan fizzbuzz)
+		defer close(chans[i])
+	}
+
+	for i := 0; i < len(chans)-1; i++ {
+		go converters[i](chans[i], chans[i+1])
+	}
+
+	for i := 1; i < 100; i++ {
+		chans[0] <- fizzbuzz{in: i}
+		r := <-chans[len(chans)-1]
+		fmt.Printf("%d - %s\n", r.in, r.out)
+	}
+}
+
 func fizz(in <-chan fizzbuzz, out chan<- fizzbuzz) {
 	for i := range in {
 		if i.in%3 == 0 {
@@ -41,21 +60,4 @@ func number(in <-chan fizzbuzz, out chan<- fizzbuzz) {
 	}
 }
 
-func main() {
-	chans := make([]chan fizzbuzz, 4)
 
-	for i := range chans {
-		chans[i] = make(chan fizzbuzz)
-		defer close(chans[i])
-	}
-
-	for i := 0; i < len(chans)-1; i++ {
-		go converters[i](chans[i], chans[i+1])
-	}
-
-	for i := 1; i < 100; i++ {
-		chans[0] <- fizzbuzz{in: i}
-		r := <-chans[len(chans)-1]
-		fmt.Printf("%d - %s\n", r.in, r.out)
-	}
-}

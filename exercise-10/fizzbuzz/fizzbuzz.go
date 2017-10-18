@@ -1,20 +1,38 @@
 package fizzbuzz
 
-import (
-	"strconv"
+import "strconv"
 
-	"github.com/domdavis/training/exercise-10/intconv"
+const (
+	fizz = "Fizz"
+	buzz = "Buzz"
 )
 
-var FizzBuzzer intconv.Converter = func(i int) string {
-	switch {
-	case i%3 == 0 && i%5 == 0:
-		return "FizzBuzz"
-	case i%3 == 0:
-		return "Fizz"
-	case i%5 == 0:
-		return "Buzz"
-	default:
+type Translator func(int) string
+
+var Fizz Translator = func(i int) string {
+	if i%3 == 0 {
+		return fizz
+	}
+
+	return ""
+}
+
+var Buzz Translator = func(i int) string {
+	if i%5 == 0 {
+		return buzz
+	}
+
+	return ""
+}
+
+func Number(i int) string {
+	if i%3 != 0 && i%5 != 0 {
 		return strconv.Itoa(i)
 	}
+
+	return ""
+}
+
+func FizzBuzz(f Translator, i int) string {
+	return f(i)
 }
